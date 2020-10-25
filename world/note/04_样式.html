@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+    <style>
+        .page{
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+            display:none;
+        }
+        .active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+<!--    <div class="page"></div>-->
+<!--    通过对象的方式决定是否存在某个类-->
+    <div class="page" :class="{active:isTrue}"></div>
+<!--    直接放置对象-->
+    <div class="page" :class="styleobj"></div>
+<!--    放置数组-->
+    <div class="page" :class="stylearr"></div>
+<!--    放置字符串-->
+    <div class="page" :class="stylestr"></div>
+<!--    数组和对象混合-->
+    <div class="page" :class="stylearrobj"></div>
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            isTrue:true,
+            styleobj:{active:true,laochen:true,'col-lg-6':true},
+            //可直接用数组的方式增加或删除,增加用push() 删除用pop()
+            stylearr:['col-xs-12','red-bg'],
+            stylestr:'abc vdcd',
+            stylearrobj:['abc'{active:true}]
+        }
+    })
+</script>
+
+</body>
+</html>

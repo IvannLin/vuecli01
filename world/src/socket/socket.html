@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="socket.io.js"></script>
+</head>
+<body>
+<script>
+    console.log(io);
+    let con = io.connect("http://localhost");
+    con.on('connect',function (data) {
+        console.log("连接事件");
+        console.log(data);
+    })
+    con.on('news',function (data) {
+        console.log(data);
+    })
+
+
+    con.emit("my other event",{
+        usernmae:"蔺",
+        chatcontent:"你吃了吗?"
+    })
+</script>
+</body>
+</html>

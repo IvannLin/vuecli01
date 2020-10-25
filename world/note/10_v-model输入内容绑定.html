@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{username}}</h2>
+        <hr>
+        <h1>单行文本输入框</h1>
+<!--        修饰符可以一起使用   .trim自动去掉前后空白格-->
+        <input type="text" name="username" v-model.lazy.trim="username" value="">
+        <h1>多行文本输入框</h1>
+        <textarea name="" id="" cols="30" rows="10" v-model="username"></textarea>
+
+
+
+
+        <h1>复选框:选择喜欢的水果</h1>
+        <span v-for="item in fruits">
+            {{item}}
+            <input  type="checkbox" name="fruit" v-model="checkFruits" :value="item">
+        </span>
+        <h2>{{checkFruits}}</h2>
+
+
+
+        <h1>单选框:选择最喜欢的水果</h1>
+        <span v-for="item in fruits">
+            {{item}}
+            <input  type="radio" name="ffruit" v-model="radioFruits" :value="item">
+        </span>
+        <h2>{{radioFruits}}</h2>
+
+
+
+
+
+        <h1>选项框:选择你居住的城市</h1>
+<!--        v-model要绑定在select这个元素上,不能绑定在option-->
+        <select v-model="chooseCity">
+            <option disabled value="">请选择</option>
+            <option  v-for="item in citys" :value="item">{{item}}</option>
+        </select>
+        <h3>{{chooseCity}}</h3>
+
+
+        <h1>选项框:选择你喜欢的城市</h1>
+        <select v-model="moreCity" multiple="multiple">
+            <option v-for="item in citys" :value="item">{{item}}</option>
+        </select>
+        <h3>{{moreCity}}</h3>
+
+
+
+        <h1>将字符串变为数字获取</h1>
+        <input type="text" name="age" v-model.number="age" value="">
+    </div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            username: "小明",
+            fruits:['苹果','桃子','香蕉'],
+            checkFruits:[],
+            radioFruits:"",
+            citys:['北京','天津','上海','广州'],
+            chooseCity:'',
+            moreCity:[],
+            age:16
+        },
+        watch:{
+            age:function (val) {
+                console.log(val);
+            }
+        },
+        methods:{
+
+            }
+
+    })
+</script>
+
+</body>
+</html>

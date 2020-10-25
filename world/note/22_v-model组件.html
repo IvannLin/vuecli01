@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <input-com :username="username" @input="username=$event"></input-com>
+        <input-com v-model="username"></input-com>
+        <h3>{{username}}</h3>
+    </div>
+    <script>
+        Vue.component('input-com',{
+            props:['username'],
+            template:`<input type="text" @input="$emit('input',$event.target.value)" :value="username">`,
+        })
+
+
+
+
+        let app = new Vue({
+            el: '#app',
+            data:{
+                username:''
+            },
+            methods:{
+                changeEvent:function (data) {
+                    this.username = data
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

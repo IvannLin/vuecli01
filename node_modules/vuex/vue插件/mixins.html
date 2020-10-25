@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h1>{{num}}</h1>
+        <child-element></child-element>
+    </div>
+    <script>
+        let options = {
+            data:{
+                num:100,
+                msg:'llll'
+            },
+            created:function () {
+                console.log('vue生命周期created');
+            },
+            beforeMount() {
+                console.log('vue的生命周期beforeMount');
+            },
+            mounted(){
+                console.log('vue的生命周期mounted');
+            }
+        }
+
+        let options1 = {
+            //data使用函数
+            data:function(){
+                return{
+                    msg:'xiaolin'
+                }
+            },
+            created:function () {
+                console.log('vue生命周期created');
+            },
+            beforeMount() {
+                console.log('vue的生命周期beforeMount');
+            },
+            mounted(){
+                console.log('vue的生命周期mounted');
+            }
+        }
+
+        //组件中使用混入方式
+        Vue.component('child-element',{
+            template:'<div>{{msg}}</div>',
+            mixins:[options1]
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello vue插件'
+            },
+            mixins:[options],
+
+        })
+    </script>
+</body>
+</html>

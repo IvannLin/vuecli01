@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script src="../vue(1).js"></script>-->
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg" name="">
+        <h1>{{msg}}</h1>
+<!--        v-html绑定的h1对象上的inner html-->
+        <h1 v-html="msg"></h1>
+        <button type="button" @click="changeEvent" >修改msg</button>
+    </div>
+
+
+    <script>
+        class Vue{
+            constructor(options) {
+                //通过选择获取根对象
+                this.$el = document.querySelector(options.el);
+                this.$options = options
+
+                //设置一个对象专门保存更新修改事件
+                this.watchEvent = {}
+                // console.log(options.data);
+
+                //代理options的data数据
+                this.proxyData()
+                //劫持事件
+                for (let key in this.$options.data) {
+                    //获取此处value保存
+                    let value = this.$options.data[key]
+                    let that = this
+                    // console.log(key);
+                    Object.defineProperty(this.$options.data,key,{
+                        configurable:false,
+                        enumerable:true,
+                        // value:"定义值",
+                        // writable:true/false 定义是否可以修改
+                        get() {
+                            //获取this[key]时,即返回options的data[key]
+                            // console.log("触发获取内容事件");
+                            return value
+                        },
+                        set(v) {
+                            value = v
+                            // console.log("触发设置事件");
+                            if (that.$watchEvent[key]){
+                                that.$watchEvent[key].forEach(item,index)
+                                {
+                                    item.update()
+                                }
+                            }
+                        }
+
+                    })
+
+                }
+            }
+            proxyData(){
+                //循环通过set,get方法来实现代理数据
+                for (let key in this.$options.data) {
+
+                    // console.log(key);
+                    Object.defineProperty(this,key,{
+                        configurable:false,
+                        enumerable:true,
+                        // value:"定义值",
+                        // writable:true/false 定义是否可以修改
+                        get() {
+                            //获取this[key]时,即返回options的data[key]
+                            return this.$options.data[key]
+                        },
+                        set(v) {
+                            this.$options.data[key] = v
+                        }
+                    })
+                }
+            }
+        }
+
+        class Watch{
+            constructor(vm,key,node,property,nodeType) {
+                //vm即实例化的app对象
+                this.vm = vm;
+                //key即绑定的vm触发的属性
+                this.key = key;
+                //node即此vm[key]数据绑定的html节点
+                this.node = node;
+                //property即vm数据所绑定的html节点的属性名称
+                this.property = property;
+
+
+            }
+            update(){
+                this.node[this.property] = this.vm[this.key];
+
+        }
+
+        }
+    </script>
+    <script>
+        let options ={
+            el: '#app',
+            data:{
+                msg:"hello linfan",
+                username:"小明"
+            },
+            methods:{
+                changeEvent:function () {
+                    this.msg = "hello vue"
+                }
+            }
+        }
+        let app = new Vue(options)
+        // app.msg = options.data.msg
+        // app.msg = 'abc'
+        // options.data.msg = 'abc'
+        console.log(app);
+
+    </script>
+</body>
+</html>

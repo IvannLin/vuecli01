@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    /*font-family: "Brush Script MT";*/
+    /*font-family: "Colonna MT";*/
+    font-family: "Roboto Light";
+
+    font-size:30px;
+}
+#top {
+    height: 5px;
+    width: 100%;
+    background-color: #dc847f;
+}
+.nav-area{
+    height: 50px;
+    width: 100%;
+    background-color: white;
+
+}
+.nav-area>ul{
+    list-style-type: none;
+    margin-top: 50px;
+}
+.nav-area>ul>li{
+    float:left;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+.nav-area ul li a{
+    text-decoration: none;
+    color: #dcae9d;
+    font-weight: bold;
+    /*box-shadow: 2px 2px 2px #dd404a;*/
+    display: block;
+    text-transform: uppercase;
+}
+.nav-area>ul>li>a:hover{
+    /*background: #fff;*/
+    color: #dc8b94;
+    transition: all 0.5s ease;
+
+}
+
+
+.dropdown ul li{
+    background:#262626;
+    display: none;
+    animation: animate 1s ease;
+    transition: 1s;
+}
+.dropdown ul li a{
+    color:#dcae9d;
+    font-family: "Comic Sans MS";
+    font-size: 25px;
+}
+.dropdown ul li a:hover{
+    /*background: #dcaa8b;*/
+    color:#eea236;
+}
+.nav-area ul li:hover ul li{
+    display: block;
+}
+
+
+
+
+.dropdown ul li:nth-child(1){
+    animation: animate 500ms ease;
+}
+.dropdown ul li:nth-child(2){
+    animation: animate 800ms ease;
+}
+.dropdown ul li:nth-child(3){
+    animation: animate 1s ease;
+}
+.dropdown ul li:nth-child(4){
+    animation: animate 1.5s ease;
+}
+@keyframes animate {
+    0%{transform: scale(2,2) rotateX(90deg);}
+    1000%{transform: scale(1,1) rotateX(0deg);}
+}

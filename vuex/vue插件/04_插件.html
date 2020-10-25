@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <div v-focus=""></div>
+    </div>
+    <script>
+        let plugin = {
+            install:function (Vue) {
+                console.log('安装plugin插件');
+                //1.添加全局方法或属性
+                Vue.bgColor = 'skyblue'
+                Vue.changeBg = function () {
+                    document.body.style.backgroundColor =  Vue.bgColor
+                    //逻辑
+
+                }
+                //2.添加全局指令
+                Vue.directive('focus',{
+                    bind(el,binding,vnode,oldVnode){
+                        //逻辑
+                        el.innerHTML='focus'
+                    }
+                })
+                //3.注入插件选项
+                Vue.mixin({
+                    created:function () {
+                    console.log('这是混入的生命周期')
+                    }
+                })
+                //4.添加实例方法
+                Vue.prototype.$changeColor = function (methodOptions) {
+                    Vue.changeBg()
+                }
+            }
+        }
+        Vue.use(plugin)
+        let app = new Vue({
+            el:'#app',
+            data:{
+
+            }
+        })
+    </script>
+
+</body>
+</html>

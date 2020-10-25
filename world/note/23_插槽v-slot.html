@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <alert-com :html="content"></alert-com>
+<!--        slot里面的变量 只跟父元素有关-->
+        <alert-com1>
+            <p>小心老师,{{content}}</p>
+        </alert-com1>
+
+
+    </div>
+    <script>
+        Vue.component('alert-com',{
+            props:['html'],
+            template:`
+            <div class="alert">
+                <h1>温馨提示</h1>
+                <div class="content">
+                    {{html}}
+                </div>
+            </div>`
+        })
+
+        Vue.component('alert-com1',{
+            template:`
+            <div class="alert">
+                <h1>温馨提示</h1>
+                <div class="content">
+                    <v-slot></v-slot>
+                </div>
+            </div>`,
+            data:function () {
+                return{
+                    abc:'123'
+                }
+            }
+        })
+
+
+
+        let app = new Vue({
+            el: '#app',
+            data:{
+                content:'小心熊出没'
+            },
+            methods:{
+
+            }
+        })
+
+    </script>
+</body>
+</html>

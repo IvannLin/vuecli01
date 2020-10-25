@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-focus="" v-model="msg">
+
+        <div v-lf.enter="1+1">
+
+        </div>
+    </div>
+
+
+    <script>
+        Vue.directive('focus',{
+            bind:function(){
+                // console.log('第一次指令绑定到元素上时候调用,仅调用一次');
+            },
+            inserted:function (el,binding,vnode,oldVnode) {
+                //插入函数,在元素往父元素插入时调用
+                // console.log(el)
+                // console.log(binding);
+                // console.log(vnode);
+                // console.log(oldVnode);
+                // el.focus()
+            }
+        })
+
+        Vue.directive('lf',{
+            bind:function(){
+                console.log('第一次指令绑定到元素上时候调用,仅调用一次');
+            },
+            inserted:function (el,binding,vnode,oldVnode) {
+                //插入函数,在元素往父元素插入时调用
+                console.log(el)
+                console.log(binding);
+                console.log(vnode);
+                console.log(oldVnode);
+                //循环生成一个msg值的列表
+                let str = '<ul>'
+                for (let i = 0; i < 5; i++) {
+                    str +=`<li>${binding.rawName}:${binding.value}</li>`
+                }
+                str += '</ul>'
+                el.innerHTML = str;
+            },
+            update:function (el,binding) {
+                console.log('update');
+                let str = '<ul>'
+                for (let i = 0; i < 5; i++) {
+                    str +=`<li>${binding.rawName}:${binding.value}</li>`
+                }
+                str += '</ul>'
+                el.innerHTML = str;
+
+            }
+        })
+
+
+
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello '
+            }
+        })
+    </script>
+</body>
+</html>

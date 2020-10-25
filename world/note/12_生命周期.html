@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <h1 :class="className">类名绑定</h1>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data:{
+                msg:"helloWorld",
+                className:'redBg'
+            },
+            beforeCreate(){ //此时数据data和事件方法methods还未绑定到app对象上
+                console.log('beforeCreate');
+
+            },
+            created(){//此时数据data和事件方法methods绑定到app对象上
+                console.log('created');
+                console.log(this);
+                console.log(this.msg);
+                console.log(this.clickEvent);
+            },
+            beforeMount(){ //渲染之前,根据数据生成的dom对象是获取不到的
+                console.log('beforeMount');
+                let dom = document.querySelector('.redBg')
+                console.log(dom);
+            },
+            mounted(){ //渲染之后,可以获取数据生成的dom对象
+                console.log('mounted');
+                let dom = document.querySelector('.redBg')
+                console.log(dom);
+            },
+            methods:{
+                clickEvent:function () {
+
+                }
+            },
+            beforeUpdate() { //数据更改,但内容未更改之前
+                console.log('beforeUpdate');
+            },
+            updated(){//内容已更新完毕
+                console.log('updated');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy');
+            },
+            destroyed(){
+                console.log('destroyed');
+            }
+        })
+
+
+
+
+        Vue.component("hello-com",{
+            template:'<h1>{{laochen}}</h1>',
+            data:function () {
+                return{
+                    laochen:"hello laochen"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

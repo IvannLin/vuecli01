@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{ msg }}</h1>
+    <h1>{{reverseMsg}}</h1>
+    <ul>
+        <li v-for="item in arr">{{ item }}</li>
+    </ul>
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello',
+            arr:['小明','小白','小花']
+        },
+        computed:{
+            reverseMsg:{
+                get:function(){
+                    return this.msg.split("").reverse().join("")
+            },
+                set:function (val) {
+                    console.log(val);
+                    this.msg = val.split("").reverse().join("")
+                }
+
+                }
+        },
+        watch:{
+            msg:function (val) {
+                console.log("监听事件----msg");
+                console.log(val);
+            },
+            arr:function (val) {
+                console.log("监听事件----arr");
+                this.msg = "监听事件----arr";
+                console.log(val);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

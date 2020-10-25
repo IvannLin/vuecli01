@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+    <style>
+        .content{
+            width: 200px;
+            height: 200px;
+            background-color:skyblue;
+            margin: 0 auto;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+
+
+        .slide-enter-active{
+            transition: all 1s;
+        }
+        .slide-leave-active {
+            transition: all 10s;
+        }
+        .slide-enter, .slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            transform: translateX(500px);
+            opacity: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="../animate.min.css">
+</head>
+<body>
+<div id="app">
+<!--    属性name会跟框架追加的类名一致-->
+    <transition name="slide"
+                enter-active-class="animated bounceInLeft"
+                leave-active-class="animated rotateOut">
+    <div v-if="isShow" class="content"></div>
+    </transition>
+    <button @click="toggleEvent">切换内容</button>
+
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            isShow:true
+        },
+
+        methods:{
+            toggleEvent:function () {
+                this.isShow = !this.isShow
+            }
+            }
+
+
+    })
+</script>
+
+</body>
+</html>

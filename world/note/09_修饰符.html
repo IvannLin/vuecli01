@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue(1).js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="btnParent" @click="clickParent">
+<!--        stop修饰符-->
+        <button @click.stop="clickEvent">按钮</button>
+    </div>
+
+    <form action="" method="post">
+<!--        绑定输入框回车事件-->
+        <input type="text" @keydown.enter="searchWeather" name="username" v-model="city" id="" value="" >
+
+        <!--        prevent阻止默认事件-->
+        <input @click.prevent="searchWeather" type="submit" value="提交">
+    </form>
+
+
+    <h1>只触发一次修饰符</h1>
+    <button type="button" @click0.once="onceEvent">只触发一次按钮</button>
+
+
+
+    <button type="button" @click.ctrl.exact="ctrlEvent">ctrl按键</button>
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            count:0,
+            city: "广州"
+        },
+        methods:{
+            clickEvent:function () {
+                console.log("clickEvent");
+            },
+            clickParent:function () {
+                console.log("clickParent");
+            },
+            searchWeather:function () {
+                console.log("查询天气");
+                console.log(this.city);
+            },
+            onceEvent:function () {
+                console.log("只触发一次");
+            },
+            ctrlEvent:function () {
+                console.log("ctrlEvent");
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>
